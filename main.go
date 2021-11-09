@@ -43,6 +43,22 @@ func main() {
 
 	// For loop w/ range
 	fmt.Println(accumulate(1,2,3,4,5))
+
+	// If & Variable Expression
+	fmt.Println(areYouABoomer(20), areYouABoomer(26))
+
+	// Switch
+	fmt.Println(sushiGrade(1500))
+	fmt.Println(sushiGrade(29000))
+
+	// Pointer
+	address()
+
+	// Array * Slices
+	nexonGames()
+
+	// Maps
+	capitalCities()
 }
 
 // The last 'int', at the right, is the return 'type' of this function.
@@ -85,4 +101,90 @@ func accumulate(numbers ...int) int {
 		fmt.Println(index, value)
 	}
 	return total
+}
+
+// If
+func areYouABoomer(age int) bool {
+	// Normal If
+	if age > 30 {
+		return true
+	}
+
+	// Variable Expression
+	if newAge := age + 5; newAge > 30 {
+		fmt.Println("Variable Expression")
+		return true
+	}
+	return false
+}
+
+// Switch
+func sushiGrade(price int) string {
+	// Normal switch
+	switch price {
+		case 700:
+			return "Supermarket sushi"
+		case 800:
+			return "Supermarket sushi with extra sashimi"
+	}
+
+	// Switch with flexibility
+	switch{
+		case price > 800 && price < 2500:
+			return "Restaurant sushi"
+		case price >= 2500 && price < 5000:
+			return "Superior restaurant sushi"
+	}
+
+	// Switch with variable expression
+	switch newPrice := price + 1000; newPrice {
+		case 10000:
+			return "Omakase sushi"
+		case 30000:
+			return "Premium omakase sushi"
+	}
+	return "Enter different price."
+}
+
+// Pointer
+func address() {
+	// &: Get the memory address of the variable
+	// *: See what is inside the memory address
+	chiba := 272
+	otaku := 145
+	tokyo := 100
+	destination := &chiba
+	fmt.Println(destination, *destination)
+	chiba = otaku
+	fmt.Println(destination, *destination)
+	destination = &tokyo
+	fmt.Println(destination, *destination, chiba)
+}
+
+// Array & Slices
+func nexonGames() {
+	// Normal array
+	games := [4] string {"Mabinogi", "Vindictus", "MapleStory", "Arad Chronicle"}
+
+	// Slice & appens
+	consoleGames := [] string {"Persona 4G", "DragonQuest XI S", "Biohazard Village"}
+	consoleGames = append(consoleGames, "Yakuza 0")
+	fmt.Println(games, consoleGames)
+
+	for index, value := range consoleGames {
+		fmt.Println(index, value)
+	}
+}
+
+// Maps
+func capitalCities() {
+	cities := map[string]string {"South Korea": "Seoul", "Japan": "Tokyo", "Thailand": "Bangkok", "Austria": "Wien"}
+
+	// The order of newly added key-value is not guaranteed.
+	cities["France"] = "Paris"
+
+	// Iterate maps
+	for _, value := range cities {
+		fmt.Println(value)
+	}
 }
