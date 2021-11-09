@@ -6,7 +6,7 @@ Learning Go language for my next goal, HL.
 
 ## Notes 📝
 
-### **★ Day 1** ☀️
+### **Day 1** ☀️
 
 #### Resource 📖
 
@@ -109,4 +109,126 @@ func accumulate(numbers ...int) int {
 // 2 3
 // 3 4
 // 4 5
+</pre>
+
+<hr>
+
+### **Day 2** ☀️
+
+#### 💡 **If**
+
+* Variable Expression: A variable that can be create at the timing of `if` statement. The variable expression is exclusive for the `if`, which means the variable can only be used in the `if` statement scope.
+
+<pre>
+// age = 26
+func areYouABoomer(age int) bool {
+	// Normal If
+	if age > 30 {
+		return true
+	}
+
+	// Variable Expression
+	if newAge := age + 5; newAge > 30 {
+		fmt.Println("Variable Expression")
+		return true
+	}
+	return false
+}
+
+// Return:
+// Variable Expression
+// true
+</pre>
+
+#### 💡 **Switch**
+
+* Similar to the switch in Java, but has more flexibility.
+
+<pre>
+// Switch with flexibility
+switch{
+  case price > 800 && price < 2500:
+    return "Restaurant sushi"
+  case price >= 2500 && price < 5000:
+    return "Superior restaurant sushi"
+}
+
+// Switch with variable expression
+switch newPrice := price + 1000; newPrice {
+  case 10000:
+    return "Omakase sushi"
+  case 30000:
+    return "Premium omakase sushi"
+}
+</pre>
+
+#### 💡 **Pointer**
+
+* Enables developers to do low level programming while using the high level language. Useful for when handling heavy operations or performances that have to be taken seriously.
+
+<pre>
+// &: Get the memory address of the variable
+// *: See what is inside the memory address
+
+chiba := 272
+otaku := 145
+tokyo := 100
+destination := &chiba
+fmt.Println(destination, *destination)
+chiba = otaku
+fmt.Println(destination, *destination)
+destination = &tokyo
+fmt.Println(destination, *destination, chiba)
+
+// Return:
+// memoryAddress, 272
+// memoryAddress, 145
+// memoryAddress, 100, 145
+</pre>
+
+#### 💡 **Arrays, Slices,  append()**
+
+* Slice: Creating an array without declaring its length. This dynamically gets bigger or smaller depening on its elements, similar to ArrayList in Java.
+
+* append(): Receives two arguments, the first one is a 'slice' and the second one is the value you want to put in. This function does `not modify` the original array like slice() in JS. Instead, it `returns a new array`.
+
+<pre>
+// Slice
+consoleGames := [] string {"Persona 4G", "DragonQuest XI S", "Biohazard Village"}
+consoleGames = append(consoleGames, "Yakuza 0")
+
+for index, value := range consoleGames {
+  fmt.Println(index, value)
+}
+
+// Return:
+// Persona 4G
+// DragonQuest XI S
+// Biohazard Village
+// Yakuza 0
+</pre>
+
+#### 💡 **Maps**
+
+* An object that consists of `key` and `values`, similar to the object in JS or maps in Java.
+
+<pre>
+variable = map[type_of_the_key] type_of_the_value { key: value, key: value ...}
+
+cities := map[string]string {"South Korea": "Seoul", "Japan": "Tokyo", "Thailand": "Bangkok", "Austria": "Wien"}
+
+// The order of newly added key-value is not guaranteed.
+cities["France"] = "Paris"
+
+// Iterate maps
+for _, value := range cities {
+  fmt.Println(value)
+}
+
+// Returns
+// Paris
+// Seoul
+// Tokyo
+// Bangkok
+// Wien
 </pre>
