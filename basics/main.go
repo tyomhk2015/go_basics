@@ -59,6 +59,9 @@ func main() {
 
 	// Maps
 	capitalCities()
+
+	// Struct
+	customizeObject()
 }
 
 // The last 'int', at the right, is the return 'type' of this function.
@@ -187,4 +190,26 @@ func capitalCities() {
 	for _, value := range cities {
 		fmt.Println(value)
 	}
+}
+
+// Struct
+type anime struct {
+	title string
+	published_date int
+	staffs []string
+}
+
+func customizeObject() {
+	// One way of creating a struct; Omitting field name.
+	// Pros: Less code can be written.
+	// Cons: Not preferrable for code readability.
+	staffs := [] string {"Kazuki Ōhashi", "Toshiya Ōno", "Kenichiro Suehiro"}
+	anime_one := anime{"Shadow House", 2021, staffs}
+
+	// Another way of creating a struct; Explicitly write field name.
+	// Pros: Good readability and less time required to figure out the structure of the struct.
+	// Cons: More code has to be written.
+	anime_two := anime{title: "Shadow House", published_date: 2021, staffs: staffs}
+
+	fmt.Println(anime_one, anime_two)
 }
