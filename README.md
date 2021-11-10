@@ -7,6 +7,7 @@ Learning Go language for my next goal, HL.
 ## Notes 📝
 
 ### **Day 1** ☀️
+<small>(2021/11/08)</small>
 
 #### Resource 📖
 
@@ -114,6 +115,7 @@ func accumulate(numbers ...int) int {
 <hr>
 
 ### **Day 2** ☀️
+<small>(2021/11/09)</small>
 
 #### 💡 **If**
 
@@ -210,7 +212,7 @@ for index, value := range consoleGames {
 
 #### 💡 **Maps**
 
-* An object that consists of `key` and `values`, similar to the object in JS or maps in Java.
+* An object that consists of `key` and `values`, similar to the `object` in JS or `maps` in Java.
 
 <pre>
 variable = map[type_of_the_key] type_of_the_value { key: value, key: value ...}
@@ -232,3 +234,87 @@ for _, value := range cities {
 // Bangkok
 // Wien
 </pre>
+
+<hr>
+
+### **Day 3** ☀️
+<small>(2021/11/10)</small>
+
+#### 💡 **Struct**
+
+* Similar to `struct` in C. Unlike the GO `maps`, `struct` is useful for creating `customized objects`, e.g. an object that takes string type, int type, and string slice.
+<pre>
+staffs := [] string {"Kazuki Ōhashi", "Toshiya Ōno", "Kenichiro Suehiro"}
+
+// One way of creating a struct; Omitting field name.
+anime_one := anime{"Shadow House", 2021, staffs}
+
+// Another way of creating a struct; Explicitly write field name.
+anime_two := anime{title: "Shadow House", published_date: 2021, staffs: staffs}
+</pre>
+
+* `lowercase` variables or functions means they are `private` or cannot be exported to other modules.
+* `uppercase` variables or functions means they are `public` or exportable to other modules.
+
+<pre>
+// This code is stored in the 'banking' package.
+func CreateBankAccount (name string) *bankingAccount {
+  bankingAccount := bankingAccount{owner: name, balance: 0}
+  return &bankingAccount
+}
+
+func main() {
+  // Creating an object.
+  // Syntax: variable := package.ConstructorFunction()
+  myBankAccount := banking.CreateBankAccount("ASH")
+  fmt.Println(myBankAccount, *myBankAccount)
+}
+
+// Return: 
+// &{ASH 0} {ASH 0}
+</pre>
+
+#### 💡 **Methods**
+
+* The things in between `func` and `deposit` is called reciever. `Reciever` writing convention: The left one is initial of the struct, the right is the struct name. `Reciever` enables the object to be equipped with certain methods, like the `Deposite` method below.
+* If the `Deposit` method's receiver did not use `*`, GO will return a new `bankingAccount` object. (e.g. {ASH 0}). 
+<br>
+By adding `*` to the receiver, GO will use existing `bankingAccount` object. (e.g. {ASH 20}).
+<br>
+※ GO tends to copy objects whenever you invoke a function or method, and return that copied obeject to the caller.
+
+<pre>
+// banking/banking.go
+func (b *bankingAccount) Deposit(amount int) {
+  b.balance += amount
+}
+
+// main.go
+  myBankAccount := banking.CreateBankAccount("ASH")
+  myBankAccount.Deposit(20)
+  fmt.Println(*myBankAccount)
+
+// Result: {ASH 20}
+</pre>
+
+#### 💡 **Error & Handling**
+
+* In GO, there is no `try & catch` or `exception` etc. All the unexpected events must be handled manually.
+
+<pre>
+var errNoMoney = errors.New("Not enough money.")
+
+func (b *bankingAccount) Withdraw(amount int) error {
+  if b.balance < amount {
+    return errNoMoney // Return the error message.
+  }
+  b.balance -= amount
+  return nil // Go's syntax requirement.
+}
+</pre>
+
+#### Utilize Struct: Banking Account Program, done. ✔️
+#### Utilize Map: Dictionary Program, done. ✔️
+
+
+
