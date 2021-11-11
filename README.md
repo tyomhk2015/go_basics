@@ -2,7 +2,7 @@
 # GO Basics
 Learning Go language for my next goal, HL.
 
-> <a href="#user-content-day1">Day 1</a>　<small>2021/11/08</small>
+<a href="#user-content-day1">Day 1</a>　<small>2021/11/08</small>
 * Setup
 * Main Package
 * Import
@@ -10,29 +10,27 @@ Learning Go language for my next goal, HL.
 * Functions
 * For
 
-> <a href="#user-content-day2">Day 2</a>　<small>2021/11/09</small>
+<a href="#user-content-day2">Day 2</a>　<small>2021/11/09</small>
 * If
 * Switch
 * Pointer
 * Arrays, Slices
 * Maps
 
-> <a href="#user-content-day3">Day 3</a>　<small>2021/11/10</small>
+<a href="#user-content-day3">Day 3</a>　<small>2021/11/10</small>
 * Struct
 * Methods
 * Error & Handling
 * Mini project.
-<br>
 [
 <a href="https://github.com/tyomhk2015/go_basics/tree/main/banking" target="_blank" rel="noopener"><small>Banking Account</small></a>,
 <a href="https://github.com/tyomhk2015/go_basics/tree/main/dictionary" target="_blank" rel="noopener"><small>Dictionary</small></a>
 ]
 
-> <a href="#user-content-day4">Day 4</a>　<small>2021/11/11</small>
+<a href="#user-content-day4">Day 4</a>　<small>2021/11/11</small>
 * goroutines
 * Channels
 * Mini project.
-<br>
 [
 <a href="https://github.com/tyomhk2015/go_basics/tree/main/urlChecker" target="_blank" rel="noopener"><small>URL Checker</small></a>,
 <a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener"><small>Job Scrapper</small></a>
