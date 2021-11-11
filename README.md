@@ -2,12 +2,48 @@
 # GO Basics
 Learning Go language for my next goal, HL.
 
+> <a href="#user-content-day1">Day 1</a>　<small>2021/11/08</small>
+* Setup
+* Main Package
+* Import
+* Variables & Constants
+* Functions
+* For
+
+> <a href="#user-content-day2">Day 2</a>　<small>2021/11/09</small>
+* If
+* Switch
+* Pointer
+* Arrays, Slices
+* Maps
+
+> <a href="#user-content-day3">Day 3</a>　<small>2021/11/10</small>
+* Struct
+* Methods
+* Error & Handling
+* Mini project.
+<br>
+[
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/banking" target="_blank" rel="noopener"><small>Banking Account</small></a>,
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/dictionary" target="_blank" rel="noopener"><small>Dictionary</small></a>
+]
+
+> <a href="#user-content-day4">Day 4</a>　<small>2021/11/11</small>
+* goroutines
+* Channels
+* Mini project.
+<br>
+[
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/urlChecker" target="_blank" rel="noopener"><small>URL Checker</small></a>,
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener"><small>Job Scrapper</small></a>
+]
+
 <hr>
 
 ## Notes 📝
 
-### **Day 1** ☀️
-<small>(2021/11/08)</small>
+### **<a href="javascript:void(0);" id="day1">Day 1</a>** ☀️
+<small>2021/11/08</small>
 
 #### Resource 📖
 
@@ -114,8 +150,8 @@ func accumulate(numbers ...int) int {
 
 <hr>
 
-### **Day 2** ☀️
-<small>(2021/11/09)</small>
+### **<a href="javascript:void(0);" id="day2">Day 2</a>** ☀️
+<small>2021/11/09</small>
 
 #### 💡 **If**
 
@@ -237,8 +273,8 @@ for _, value := range cities {
 
 <hr>
 
-### **Day 3** ☀️
-<small>(2021/11/10)</small>
+### **<a href="javascript:void(0);" id="day3">Day 3</a>** ☀️
+<small>2021/11/10</small>
 
 #### 💡 **Struct**
 
@@ -314,7 +350,109 @@ func (b *bankingAccount) Withdraw(amount int) error {
 </pre>
 
 #### Utilize Struct: Banking Account Program, done. ✔️
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/banking" target="_blank" rel="noopener"><small>Code</small></a>
+
 #### Utilize Map: Dictionary Program, done. ✔️
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/dictionary" target="_blank" rel="noopener"><small>Code</small></a>
+
+### **<a href="javascript:void(0);" id="day4">Day 4</a>** ☀️
+<small>2021/11/11</small>
+
+💡 **Tip for making an empty map**
+
+<pre>
+  // make() can make empty 
+  results := make(map[string]string)
+
+  // This will be 'nil' and cannnot add any objects into it.
+  var results map[string]string
+</pre>
 
 
+#### 💡 **goroutines**
 
+* Enable functions to run `Concurrently`.
+
+* By adding `go` keyword before calling a function, the function will run `concurrently` with the main func or the main thread.
+<br>
+Caution: `main func` do not wait for `go` routines to finish their jobs. Thus if all called functions have `go` keyword, and if the `main func` don't have anything else to do, the program will be finished. 
+<br>
+It is important to communicate between `go` routines and `main func`.
+
+<pre>
+// main func does not wait for the 'go' routines to finish.
+func main() {
+  go functionOne()
+  go functionTwo()
+}
+
+// Cannot receive returns from goroutines.
+</pre>
+
+#### 💡 **Channels**
+
+* For communicating `main func` and `go` routines.
+<br>
+Solves the problem mentioned above, the paragraph in '`Go routines` Caution'.
+
+<pre>
+func channel_main() {
+  // variable := make(channel data_type_for_communication)
+  channel := make(chan bool)
+
+  foods := [2]string{"Sushi", "Ekiben"}
+  for _, food := range foods {
+    // go routine for concurrency
+    // Giving channel as an argument, the main() and eatFood() can communicate.
+    go eatFood(food, channel)
+  }
+
+  // Get the value used in channel.
+  // <- : Blocking operation, getting something out from another thing.
+  fmt.Println(<-channel) // Waiting for a message.
+  fmt.Println(<-channel)
+
+  // If all 'go' routines are finished, the channel has nothing more todo.
+  // Therefore, an error invokes.
+  fmt.Println(<-channel)
+}
+
+// The 2nd arg: Takes a channel, and a bool for communicating with main(),
+//              or data type you want to give to the channel to communicate.
+func eatFood(food string, c chan bool) {
+  fmt.Println(food)
+  // Send bool to channel for communicating w/ the main func.
+  c <- true
+}
+
+// Result:
+// Ekiben
+// true
+// Sushi
+// true
+</pre>
+
+* (c chan<- communcation_type): For one-direction sending, write-only.
+<a href="https://blog.gopheracademy.com/advent-2019/directional-channels/" target="_blank" rel="noopener"><small>Explanation Link</small></a>
+
+<pre>
+chan<- type : Put type into the channel.
+<-chan      : Get something out from the channel.
+</pre>
+
+#### ⚠️ **Troubleshooting**
+* <b>Problem</b>:
+<br>
+There was an error about not able to find goquery module.
+<br>
+The source of the problem was directory for installing 3rd party libraries were at '`C:\Users\user_name\go`', the '`GOPATH`', not `C:\Go\`.
+<br><br>
+<b>Solution</b>: ✔️
+<br>
+Followed the <a href="https://golang.org/doc/gopath_code#GOPATH" target="_blank" rel="noopener">guide</a>, which explains about creating a new directory and setting a customized `GOPATH`. Then changed the value of '`GO111MODULE`' variable of '`go env`' to false. (<a href="https://golang.org/doc/gopath_code#GOPATH" target="_blank" rel="noopener"><small>Link</small></a>)
+<br>
+Finally, installed the goquery again. Then the error disappeared.
+
+* Started using <a href="https://github.com/PuerkitoBio/goquery" target="_blank" rel="noopener">goquery</a> to scrap a website. 
+<br>
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener"><small>Link to the mini project</small></a>
