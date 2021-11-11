@@ -452,5 +452,4 @@ Followed the <a href="https://golang.org/doc/gopath_code#GOPATH" target="_blank"
 Finally, installed the goquery again. Then the error disappeared.
 
 * Started using <a href="https://github.com/PuerkitoBio/goquery" target="_blank" rel="noopener">goquery</a> to scrap a website. 
-<br>
 <a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener"><small>Link to the mini project</small></a>
