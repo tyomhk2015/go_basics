@@ -2,7 +2,7 @@
 # GO Basics
 Learning Go language for my next goal, HL.
 
-<a href="#user-content-day1">Day 1</a>　<small>2021/11/08</small>
+<a href="#user-content-day1">Day 1</a>　2021/11/08
 * Setup
 * Main Package
 * Import
@@ -10,38 +10,38 @@ Learning Go language for my next goal, HL.
 * Functions
 * For
 
-<a href="#user-content-day2">Day 2</a>　<small>2021/11/09</small>
+<a href="#user-content-day2">Day 2</a>　2021/11/09
 * If
 * Switch
 * Pointer
 * Arrays, Slices
 * Maps
 
-<a href="#user-content-day3">Day 3</a>　<small>2021/11/10</small>
+<a href="#user-content-day3">Day 3</a>　2021/11/10
 * Struct
 * Methods
 * Error & Handling
-* Mini project.
+* Mini project
 [
-<a href="https://github.com/tyomhk2015/go_basics/tree/main/banking" target="_blank" rel="noopener"><small>Banking Account</small></a>,
-<a href="https://github.com/tyomhk2015/go_basics/tree/main/dictionary" target="_blank" rel="noopener"><small>Dictionary</small></a>
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/banking" target="_blank" rel="noopener">Banking Account</a>,
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/dictionary" target="_blank" rel="noopener">Dictionary</a>
 ]
 
-<a href="#user-content-day4">Day 4</a>　<small>2021/11/11</small>
+<a href="#user-content-day4">Day 4</a>　2021/11/11
 * goroutines
 * Channels
-* Mini project.
+* Mini project
 [
-<a href="https://github.com/tyomhk2015/go_basics/tree/main/urlChecker" target="_blank" rel="noopener"><small>URL Checker</small></a>,
-<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener"><small>Job Scrapper</small></a>
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/urlChecker" target="_blank" rel="noopener">URL Checker</a>,
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Job Scrapper</a>
 ]
-
+* Troubleshooting
 <hr>
 
 ## Notes 📝
 
 ### **<a href="javascript:void(0);" id="day1">Day 1</a>** ☀️
-<small>2021/11/08</small>
+2021/11/08
 
 #### Resource 📖
 
@@ -68,11 +68,11 @@ Learning Go language for my next goal, HL.
 
 * If you want to create a library, the file name does not have to main. Because the person who will use the library will complile with his/her 'main.go'.
 
-* (IMPORTANT) The GO code will look for the 'main' package and '`main`' function as the first priority, similar to Java 'main' method.
+* (IMPORTANT) The GO code will look for the 'main' package and `main` function as the first priority, similar to Java 'main' method.
 
 #### 💡 **Import**
 
-* If you want to export some functions, the function name must start with an `uppercase` letter, a.k.a '`exported` function' from a different package. (e.g. Println)
+* If you want to export some functions, the function name must start with an `uppercase` letter, a.k.a `exported` function' from a different package. (e.g. Println)
 Functions start with `lowercase` letter are `private` functions.
 
 #### 💡 **Variables & Constants**
@@ -97,7 +97,7 @@ Constants: values you cannot change.
 returnOne, returnTwo, returnThree := multipleReturn(arg ...type)
 </pre>
 
-* To omit some returns from a function, use the '`_`', an underscore sign. This ignores the current return value. 
+* To omit some returns from a function, use the `_`, an underscore sign. This ignores the current return value. 
 <pre>
 // The first, and the third return values are store in the corresponding variables.
 returnOne, _, returnThree := multipleReturn(arg ...type)
@@ -149,7 +149,7 @@ func accumulate(numbers ...int) int {
 <hr>
 
 ### **<a href="javascript:void(0);" id="day2">Day 2</a>** ☀️
-<small>2021/11/09</small>
+2021/11/09
 
 #### 💡 **If**
 
@@ -272,7 +272,7 @@ for _, value := range cities {
 <hr>
 
 ### **<a href="javascript:void(0);" id="day3">Day 3</a>** ☀️
-<small>2021/11/10</small>
+2021/11/10
 
 #### 💡 **Struct**
 
@@ -348,13 +348,13 @@ func (b *bankingAccount) Withdraw(amount int) error {
 </pre>
 
 #### Utilize Struct: Banking Account Program, done. ✔️
-<a href="https://github.com/tyomhk2015/go_basics/tree/main/banking" target="_blank" rel="noopener"><small>Code</small></a>
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/banking" target="_blank" rel="noopener">Code</a>
 
 #### Utilize Map: Dictionary Program, done. ✔️
-<a href="https://github.com/tyomhk2015/go_basics/tree/main/dictionary" target="_blank" rel="noopener"><small>Code</small></a>
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/dictionary" target="_blank" rel="noopener">Code</a>
 
 ### **<a href="javascript:void(0);" id="day4">Day 4</a>** ☀️
-<small>2021/11/11</small>
+2021/11/11
 
 💡 **Tip for making an empty map**
 
@@ -391,7 +391,7 @@ func main() {
 
 * For communicating `main func` and `go` routines.
 <br>
-Solves the problem mentioned above, the paragraph in '`Go routines` Caution'.
+Solves the problem mentioned above, the paragraph in `Go routines` Caution'.
 
 <pre>
 func channel_main() {
@@ -431,25 +431,28 @@ func eatFood(food string, c chan bool) {
 </pre>
 
 * (c chan<- communcation_type): For one-direction sending, write-only.
-<a href="https://blog.gopheracademy.com/advent-2019/directional-channels/" target="_blank" rel="noopener"><small>Explanation Link</small></a>
+<a href="https://blog.gopheracademy.com/advent-2019/directional-channels/" target="_blank" rel="noopener">Explanation Link</a>
 
 <pre>
 chan<- type : Put type into the channel.
 <-chan      : Get something out from the channel.
 </pre>
 
+* Started using <a href="https://github.com/PuerkitoBio/goquery" target="_blank" rel="noopener">goquery</a> to scrap a website. 
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Link to the mini project</a>.
+
 #### ⚠️ **Troubleshooting**
-* <b>Problem</b>:
-<br>
+
+<b>Problem</b>:
+
 There was an error about not able to find goquery module.
+
+The source of the problem was directory for installing 3rd party libraries were at `C:\Users\user_name\go`, the `GOPATH`, not `C:\Go\`.
+
 <br>
-The source of the problem was directory for installing 3rd party libraries were at '`C:\Users\user_name\go`', the '`GOPATH`', not `C:\Go\`.
-<br><br>
+
 <b>Solution</b>: ✔️
-<br>
-Followed the <a href="https://golang.org/doc/gopath_code#GOPATH" target="_blank" rel="noopener">guide</a>, which explains about creating a new directory and setting a customized `GOPATH`. Then changed the value of '`GO111MODULE`' variable of '`go env`' to false. (<a href="https://golang.org/doc/gopath_code#GOPATH" target="_blank" rel="noopener"><small>Link</small></a>)
+
+Followed the <a href="https://golang.org/doc/gopath_code#GOPATH" target="_blank" rel="noopener">guide</a>, which explains about creating a new directory and setting a customized `GOPATH`. Then changed the value of `GO111MODULE` variable of `go env` to false. (<a href="https://golang.org/doc/gopath_code#GOPATH" target="_blank" rel="noopener">Link</a>)
 <br>
 Finally, installed the goquery again. Then the error disappeared.
-
-* Started using <a href="https://github.com/PuerkitoBio/goquery" target="_blank" rel="noopener">goquery</a> to scrap a website. 
-<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener"><small>Link to the mini project</small></a>
