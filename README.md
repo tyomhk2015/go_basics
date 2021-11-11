@@ -446,7 +446,6 @@ chan<- type : Put type into the channel.
 <b>Problem</b>:
 
 There was an error about not able to find goquery module.
-
 The source of the problem was directory for installing 3rd party libraries were at `C:\Users\user_name\go`, the `GOPATH`, not `C:\Go\`.
 
 <br>
