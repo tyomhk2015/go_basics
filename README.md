@@ -36,6 +36,14 @@ Learning Go language for my next goal, HL.
 <a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Job Scrapper</a>
 ]
 * Troubleshooting
+
+<a href="#user-content-day5">Day 5</a>　2021/11/12
+* Troubleshooting
+* Mini project
+[
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Job Scrapper</a>
+]
+
 <hr>
 
 ## Notes 📝
@@ -455,3 +463,25 @@ The source of the problem was directory for installing 3rd party libraries were 
 Followed the <a href="https://golang.org/doc/gopath_code#GOPATH" target="_blank" rel="noopener">guide</a>, which explains about creating a new directory and setting a customized `GOPATH`. Then changed the value of `GO111MODULE` variable of `go env` to false. (<a href="https://golang.org/doc/gopath_code#GOPATH" target="_blank" rel="noopener">Link</a>)
 <br>
 Finally, installed the goquery again. Then the error disappeared.
+
+### **<a href="javascript:void(0);" id="day5">Day 5</a>** ☀️
+2021/11/12
+
+* Thanks to goquery library, I was able to utilize my jQuery experience and scrap the site without much trouble. 😊
+
+* Continued working on the mini project, the `jobScrapper'.
+[
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Job Scrapper</a>
+]
+
+#### ⚠️ **Troubleshooting**
+
+<b>Problem</b>:
+
+Tried to take a struct, filled with some data, as an argument of a function, I've got an `empty struct` several times, which I did not expect to happen.
+
+<br>
+
+<b>Solution</b>: ✔️
+
+Used `Pointer` feature and was able to get the desired struct, the one filled with some data.
