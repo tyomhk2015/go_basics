@@ -41,7 +41,8 @@ Learning Go language for my next goal, HL.
 * Troubleshooting
 * Mini project
 [
-<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Job Scrapper</a>
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Job Scrapper</a>,
+<a href="https://github.com/tyomhk2015/go_basics/commit/759e92c138fc6a9143c347ec036ee917fde7e467#diff-4578cddcc86e7c6428a0fcc63a5fbbefa6bc675f6c71dc3220a8af5418bd220f" target="_blank" rel="noopener">commit</a>
 ]
 
 <hr>
