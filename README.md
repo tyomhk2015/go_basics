@@ -513,7 +513,7 @@ Added a <a href="https://pkg.go.dev/time#hdr-Monotonic_Clocks" target="_blank" r
 
 📖 <a href="https://echo.labstack.com/" target="_blank" rel="noopener">Echo</a>, Go web framework.
 
-* Mini project: <a href="https://github.com/tyomhk2015/go_basics/tree/main/scrapper" target="_blank" rel="noopener">Scraper</a>, Done! ✔️
+* Mini project: <a href="https://github.com/tyomhk2015/go_basics/tree/main/scrapper" target="_blank" rel="noopener">Scrapper</a>, Done! ✔️
 
 ![jobScrapperDone](https://user-images.githubusercontent.com/35278730/141649155-114d09da-833d-4b51-bf07-33bd4d00fa14.gif)
 
