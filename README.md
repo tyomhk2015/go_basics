@@ -475,6 +475,8 @@ Finally, installed the goquery again. Then the error disappeared.
 <a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Job Scrapper</a>
 ]
 
+![jobscrapper](https://user-images.githubusercontent.com/35278730/141606359-7a25c386-c4c0-492c-a5bd-94b4358e31b9.gif)
+
 #### ⚠️ **Troubleshooting**
 
 <b>Problem</b>:
