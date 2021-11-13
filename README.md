@@ -484,10 +484,7 @@ Finally, installed the goquery again. Then the error disappeared.
 
 * Thanks to goquery library, I was able to utilize my jQuery experience and scrap the site without much trouble. 😊
 
-* Continued working on the mini project, the `jobScrapper'.
-[
-<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Job Scrapper</a>
-]
+* Continued working on the mini project, <a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Job Scrapper</a>.
 
 ![jobscrapper](https://user-images.githubusercontent.com/35278730/141606359-7a25c386-c4c0-492c-a5bd-94b4358e31b9.gif)
 
@@ -518,7 +515,8 @@ Added a <a href="https://pkg.go.dev/time#hdr-Monotonic_Clocks" target="_blank" r
 
 * Mini project: <a href="https://github.com/tyomhk2015/go_basics/tree/main/scrapper" target="_blank" rel="noopener">Scraper</a>, Done! ✔️
 
-[TODO: GIF Attachment]
+![jobScrapperDone](https://user-images.githubusercontent.com/35278730/141649155-114d09da-833d-4b51-bf07-33bd4d00fa14.gif)
+
 
 #### ⚠️ **Troubleshooting**
 
