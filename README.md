@@ -1,6 +1,6 @@
 <!-- Ctrl+Shift+V -->
 # GO Basics
-Learning Go language for my next goal, HL.
+This is a personal log about learning Go lang, for my HL goal.
 
 <a href="#user-content-day1">Day 1</a>　2021/11/08
 * Setup
@@ -45,6 +45,17 @@ Learning Go language for my next goal, HL.
 <a href="https://github.com/tyomhk2015/go_basics/commit/759e92c138fc6a9143c347ec036ee917fde7e467#diff-4578cddcc86e7c6428a0fcc63a5fbbefa6bc675f6c71dc3220a8af5418bd220f" target="_blank" rel="noopener">commit</a>
 ]
 
+<a href="#user-content-day6">Day 6</a>　2021/11/13
+* Mini project
+[
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Job Scrapper</a>
+]
+* Echo
+[
+<a href="https://github.com/tyomhk2015/go_basics/tree/main/scrapper" target="_blank" rel="noopener">Scraper</a>
+]
+* Troubleshooting
+
 <hr>
 
 ## Notes 📝
@@ -54,8 +65,11 @@ Learning Go language for my next goal, HL.
 
 #### Resource 📖
 
-📘 https://golang.org/doc/ <br>
+📘 https://golang.org/doc/
+<br>
 📗 https://go101.org/article/101.html
+<br>
+❓ <a href="https://talks.golang.org/2012/splash.article" target="_blank" rel="noopener">Why Go come into existence?</a>
 
 #### 💡 **Setup**
 
@@ -488,3 +502,52 @@ Tried to take a struct, filled with some data, as an argument of a function, I'v
 <b>Solution</b>: ✔️
 
 Used `Pointer` feature and was able to get the desired struct, the one filled with some data.
+
+### **<a href="javascript:void(0);" id="day6">Day 6</a>** ☀️
+2021/11/13
+
+* Changed all sequential operations of <a href="https://github.com/tyomhk2015/go_basics/tree/main/jobScrapper" target="_blank" rel="noopener">Job Scrapper</a>, to concurrent operations by adding `goroutines`.
+<br>
+Added a <a href="https://pkg.go.dev/time#hdr-Monotonic_Clocks" target="_blank" rel="noopener">Job Scrapper</a> to check how much time the program took to finish the scrapping job.
+
+* The program usually took 1 to 2 seconds, but thanks to the `goroutines`, sometimes this took less than a second!
+
+#### 💡 **Webserver w/ ECHO**
+
+📖 <a href="https://echo.labstack.com/" target="_blank" rel="noopener">Echo</a>, Go web framework.
+
+* Mini project: <a href="https://github.com/tyomhk2015/go_basics/tree/main/scrapper" target="_blank" rel="noopener">Scraper</a>, Done! ✔️
+
+[TODO: GIF Attachment]
+
+#### ⚠️ **Troubleshooting**
+
+<b>Problem 1</b>:
+
+'ERR_INVALID_RESPONSE' occured at the stage of returning attachment from the `echo context` in `handleScrape()`, also the popup of downloading cvs file did not show.
+
+<br>
+
+<b>Solution 1</b>: ✔️
+
+Fixed by editing `scrapper.go`, `os.Create("jobs.cvs")` to `os.Create(keyword + "_jobs.cvs")`.
+<br>
+The program searches for the existing cvs file. However, the previous code were not able to find the cvs file, because the designated name in `handleScraper()` and `scrapper.go`, the `os.Create()` one, were not the same. Thus `ERR_INVALID_RESPONSE` occured.
+<br>
+The fixed the `ERR_INVALID_RESPONSE` by modfying the two functions referring to the `same name of the csv file`.
+
+<br>
+
+<b>Problem 2</b>:
+
+In Windows 10 + Chrome, the `os.Remove()` did not perform as I expected, the csv files were either not deleted or got deleted but a new file was created after a moment.
+
+<br>
+
+<b>Solution2</b>: ✔️
+
+Seems the cause was os stream, the `os.Create()`, was still used by the `main thread`, the `main()`, and `os.Remove()` was not able to perform properly. In addition, the `file` return of the `os.Create()` was still referring the designated file name. (e.g. ruby_jobs.csv)
+<br>
+Fixed the problem by doing `defer file.Close()` in `scrapper.go`.
+<br>
+Maybe it is a good habit to close the `os` stream when the desired operation is finished, not keeping it alive. (<a href="https://stackoverflow.com/a/58351400" target="_blank" rel="noopener">Link</a>)

@@ -1,19 +1,27 @@
-package main
+package scrapper
 
 import (
 	"encoding/csv"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
-	"time"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
-func main() {
-	start := time.Now()
+// URL for getting the most recent posts.
+var baseURL = "https://kr.indeed.com/jobs?q=ruby&sort=date"
+
+type jobPost struct {
+	title   string
+	name    string
+	address string
+	link    string
+}
+
+func Scrape(keyword string) {
+	changeBaseURL(keyword)
 	channel := make(chan []jobPost)
 	extractedPosts := []jobPost{}
 	pages := getPageLength(baseURL)
@@ -29,21 +37,11 @@ func main() {
 	}
 
 	// Save the extracted information in a 'csv' file.
-	saveExtractedJobs(extractedPosts)
-	t := time.Now()
-	fmt.Println("The scrapping is done!", "\nOperation Time:", t.Sub(start))
+	saveExtractedJobs(keyword, extractedPosts)
 }
 
-var (
-	// URL for getting the most recent posts.
-	baseURL = "https://kr.indeed.com/jobs?q=ruby&sort=date"
-)
-
-type jobPost struct {
-	title   string
-	name    string
-	address string
-	link    string
+func changeBaseURL(keyword string) {
+	baseURL = "https://kr.indeed.com/jobs?q=" + keyword + "&sort=date"
 }
 
 func getPageLength(url string) int {
@@ -122,13 +120,14 @@ func extractJobPost(card *goquery.Selection, viewURL string, extractChannel chan
 	extractChannel <- post
 }
 
-func saveExtractedJobs(extractedJobs []jobPost) {
+func saveExtractedJobs(keyword string, extractedJobs []jobPost) {
 	writeJobChannel := make(chan []string)
-	file, createErr := os.Create("jobs.csv")
+	file, createErr := os.Create(keyword + "_jobs.csv")
 	checkError(createErr)
 
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
+	defer file.Close() // For making os.Remove() work in Win10 + Chrome environment.
 
 	headers := []string{
 		"Title",
