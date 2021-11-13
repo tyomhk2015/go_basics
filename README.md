@@ -376,6 +376,8 @@ func (b *bankingAccount) Withdraw(amount int) error {
 #### Utilize Map: Dictionary Program, done. ✔️
 <a href="https://github.com/tyomhk2015/go_basics/tree/main/dictionary" target="_blank" rel="noopener">Code</a>
 
+<hr>
+
 ### **<a href="javascript:void(0);" id="day4">Day 4</a>** ☀️
 2021/11/11
 
@@ -479,6 +481,8 @@ Followed the <a href="https://golang.org/doc/gopath_code#GOPATH" target="_blank"
 <br>
 Finally, installed the goquery again. Then the error disappeared.
 
+<hr>
+
 ### **<a href="javascript:void(0);" id="day5">Day 5</a>** ☀️
 2021/11/12
 
@@ -499,6 +503,8 @@ Tried to take a struct, filled with some data, as an argument of a function, I'v
 <b>Solution</b>: ✔️
 
 Used `Pointer` feature and was able to get the desired struct, the one filled with some data.
+
+<hr>
 
 ### **<a href="javascript:void(0);" id="day6">Day 6</a>** ☀️
 2021/11/13
