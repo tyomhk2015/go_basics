@@ -56,6 +56,8 @@ This is a personal log about learning Go lang, for my HL goal.
 ]
 * Troubleshooting
 
+⭐ Done with the basics of Go lang!
+
 <hr>
 
 ## Notes 📝
