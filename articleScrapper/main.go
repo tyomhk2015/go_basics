@@ -44,6 +44,7 @@ var (
 
 // If the fields' initial letter don't start with uppercase,
 // then the json parser won't able to get any information about them.
+// https://stackoverflow.com/questions/26327391/json-marshalstruct-returns
 type articlePost struct {
 	Category    string   `json:"category"`
 	Title       string   `json:"title"`
