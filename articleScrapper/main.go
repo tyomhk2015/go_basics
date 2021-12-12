@@ -32,6 +32,10 @@ func main() {
 	fmt.Println("The scrapping is done!", "\nOperation Time:", t.Sub(start))
 }
 
+const (
+	domain string = "https://b.hatena.ne.jp"
+)
+
 var (
 	// URL for getting the most recent posts.
 	baseURL  = "https://b.hatena.ne.jp/hotentry/"
@@ -68,7 +72,6 @@ func getPageContent(category string, channel chan<- []articlePost) {
 		go extractArticlePost(s, extractChannel)
 		extractedPosts = append(extractedPosts, <-extractChannel)
 	})
-	fmt.Println(len(extractedPosts), category)
 	channel <- extractedPosts
 }
 
@@ -105,7 +108,7 @@ func extractArticlePost(card *goquery.Selection, extractChannel chan<- articlePo
 	post := articlePost{
 		title:       card.Find(".entrylist-contents-title").Children().Text(),
 		users:       card.Find(".entrylist-contents-users").Find("span").Text(),
-		link:        link,
+		link:        domain + link,
 		description: card.Find(".entrylist-contents-body").Find("p").Text(),
 		postedDate:  card.Find(".entrylist-contents-date").Text(),
 		tags:        tags,
