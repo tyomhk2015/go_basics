@@ -1,11 +1,11 @@
 package main
 
 import (
-	"encoding/csv"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
@@ -42,13 +42,20 @@ var (
 	category = []string{"all", "general", "social", "economics", "life", "knowledge", "it", "fun", "entertainment", "game"}
 )
 
+// If the fields' initial letter don't start with uppercase,
+// then the json parser won't able to get any information about them.
 type articlePost struct {
-	title       string
-	users       string
-	link        string
-	description string
-	postedDate  string
-	tags        []string
+	Category    string   `json:"category"`
+	Title       string   `json:"title"`
+	Users       string   `json:"users"`
+	Link        string   `json:"link"`
+	Description string   `json:"description"`
+	PostedDate  string   `json:"postedDate"`
+	Tags        []string `json:"tags"`
+}
+
+type tag struct {
+	Tag string `json:"tag"`
 }
 
 func getPageContent(category string, channel chan<- []articlePost) {
@@ -69,7 +76,7 @@ func getPageContent(category string, channel chan<- []articlePost) {
 	extractedPosts := []articlePost{}
 	cards := doc.Find(".entrylist-contents-main")
 	cards.Each(func(i int, s *goquery.Selection) {
-		go extractArticlePost(s, extractChannel)
+		go extractArticlePost(s, category, extractChannel)
 		extractedPosts = append(extractedPosts, <-extractChannel)
 	})
 	channel <- extractedPosts
@@ -91,62 +98,29 @@ func preventMemoryLeak(res *http.Response) {
 	res.Body.Close()
 }
 
-func extractArticlePost(card *goquery.Selection, extractChannel chan<- articlePost) {
+func extractArticlePost(card *goquery.Selection, category string, extractChannel chan<- articlePost) {
 	var tags = []string{}
 
 	retrievedTags := card.Find(".entrylist-contents-tags").Children()
 	for i := 0; i < retrievedTags.Length(); i++ {
-		if i == retrievedTags.Length()-1 {
-			tags = append(tags, retrievedTags.Eq(i).Text())
-		} else {
-			tags = append(tags, retrievedTags.Eq(i).Text()+"/")
-		}
+		tags = append(tags, retrievedTags.Eq(i).Text())
 	}
 
 	link, _ := card.Find(".entrylist-contents-users").Children().Attr("href")
 
 	post := articlePost{
-		title:       card.Find(".entrylist-contents-title").Children().Text(),
-		users:       card.Find(".entrylist-contents-users").Find("span").Text(),
-		link:        domain + link,
-		description: card.Find(".entrylist-contents-body").Find("p").Text(),
-		postedDate:  card.Find(".entrylist-contents-date").Text(),
-		tags:        tags,
+		Category:    category,
+		Title:       card.Find(".entrylist-contents-title").Children().Text(),
+		Users:       card.Find(".entrylist-contents-users").Find("span").Text(),
+		Link:        domain + link,
+		Description: card.Find(".entrylist-contents-body").Find("p").Text(),
+		PostedDate:  card.Find(".entrylist-contents-date").Text(),
+		Tags:        tags,
 	}
 	extractChannel <- post
 }
 
 func saveExtractedArticles(extractedArticles []articlePost) {
-	writeArticleChannel := make(chan []string)
-	file, createErr := os.Create("articles.csv")
-	checkError(createErr)
-
-	writer := csv.NewWriter(file)
-	defer writer.Flush()
-
-	headers := []string{
-		"title",
-		"users",
-		"link",
-		"description",
-		"postedDate",
-		"tags",
-	}
-
-	writeErr := writer.Write(headers)
-	checkError(writeErr)
-
-	for _, article := range extractedArticles {
-		go writeArticle(article, writeArticleChannel)
-	}
-
-	for i := 0; i < len(extractedArticles); i++ {
-		articleWriteErr := writer.Write(<-writeArticleChannel)
-		checkError(articleWriteErr)
-	}
-}
-
-func writeArticle(article articlePost, writeArticleChannel chan<- []string) {
-	postedArticle := []string{article.title, article.users, article.link, article.description, article.postedDate, fmt.Sprint(article.tags)}
-	writeArticleChannel <- postedArticle
+	jsonData, _ := json.MarshalIndent(extractedArticles, "", " ")
+	ioutil.WriteFile("articles.json", jsonData, 0666)
 }
